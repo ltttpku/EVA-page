@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f9f8">
+  <meta name="description" content="EVA turns multimodal reasoning into an active process of seeking, organizing, and verifying visual evidence. NeurIPS 2026, Peking University.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="EVA | Evidence-seeking Visual Agent">
+  <meta property="og:description" content="From opinion-driven deliberation to evidence-backed multimodal reasoning.">
+  <meta property="og:url" content="https://ltttpku.github.io/EVA-page/">
+  <meta property="og:image" content="https://ltttpku.github.io/EVA-page/assets/teaser.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="assets/icons/scan-eye.svg" type="image/svg+xml">
+  <link rel="canonical" href="https://ltttpku.github.io/EVA-page/">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+  <title>EVA | Evidence-seeking Visual Agent</title>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <nav class="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a class="wordmark" href="#top" aria-label="EVA home">EVA<span aria-hidden="true">.</span></a>
+      <button class="icon-button menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="nav-links" title="Open navigation">
+        <img src="assets/icons/menu.svg" alt="" width="20" height="20">
+      </button>
+      <div class="nav-links" id="nav-links">
+        <a href="#overview">Overview</a>
+        <a href="#method">Method</a>
+        <a href="#results">Results</a>
+        <a href="#citation">Citation</a>
+        <a class="nav-code" href="https://github.com/oceanflowlab/EVA" target="_blank" rel="noopener noreferrer">Code <img src="assets/icons/arrow-up-right.svg" alt="" width="16" height="16"></a>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main">
+    <header class="paper-header" id="top">
+      <div class="container">
+        <p class="venue"><span class="venue-dot" aria-hidden="true"></span> NeurIPS 2026</p>
+        <h1>EVA</h1>
+        <p class="paper-title">Evidence-seeking Visual Agent for<br class="desktop-break"> Hallucination-Resistant Multimodal Reasoning</p>
+        <div class="authors" aria-label="Authors">
+          <a href="mailto:ting_lei@pku.edu.cn">Ting Lei</a>
+          <a href="mailto:yu_chen@stu.pku.edu.cn">Yu Chen</a>
+          <a href="mailto:yangliu@pku.edu.cn">Yang Liu<sup>*</sup></a>
+        </div>
+        <p class="affiliation">Wangxuan Institute of Computer Technology, Peking University</p>
+        <p class="correspondence">* Corresponding author</p>
+        <div class="resource-links">
+          <a class="button button-primary" href="https://github.com/oceanflowlab/EVA" target="_blank" rel="noopener noreferrer"><img src="assets/icons/code-xml.svg" alt="" width="19" height="19"> Code <img src="assets/icons/arrow-up-right.svg" alt="" width="17" height="17"></a>
+          <a class="button button-secondary" href="assets/paper.pdf" target="_blank" rel="noopener noreferrer"><img src="assets/icons/file-text.svg" alt="" width="18" height="18"> Paper</a>
+          <a class="button button-secondary" href="#citation"><img src="assets/icons/quote.svg" alt="" width="18" height="18"> BibTeX</a>
+        </div>
+        <p class="header-summary">Seek the evidence. Replan the tools. Verify the answer.</p>
+      </div>
+    </header>
+
+    <section class="opening-figure container" aria-labelledby="teaser-caption">
+      <figure>
+        <a class="figure-link" href="assets/teaser.png" data-figure data-caption="Agreement is not evidence. EVA grounds its answer in observations acquired through tool use and replanning." aria-label="Enlarge the opinion-driven versus evidence-driven reasoning figure">
+          <img class="paper-figure" src="assets/teaser.png" alt="A speed-limit sign reads 30. Debating agents incorrectly converge on 50; EVA localizes the sign, replans to OCR, and verifies the answer 30." width="1536" height="1024" fetchpriority="high">
+          <span class="figure-zoom" aria-hidden="true"><img src="assets/icons/maximize-2.svg" alt="" width="18" height="18"></span>
+        </a>
+        <figcaption id="teaser-caption"><strong>Agreement is not evidence.</strong> Shared perceptual errors can survive repeated deliberation. EVA instead acquires observations that support the answer.</figcaption>
+      </figure>
+    </section>
+
+    <section class="section overview" id="overview" aria-labelledby="overview-title">
+      <div class="container overview-layout">
+        <div class="section-label"><span class="section-number">01</span> The idea</div>
+        <div class="overview-content">
+          <h2 id="overview-title">Reasoning begins with<br>better evidence.</h2>
+          <p class="lead">A plausible answer is not necessarily a grounded answer. EVA makes visual evidence an explicit part of how a multimodal agent decides what to do next.</p>
+          <div id="abstract" class="abstract">
+            <h3>Abstract</h3>
+            <p>Multimodal models can share the same incorrect perceptual assumptions, producing consistent but hallucinated conclusions. Simply adding visual tools does not resolve the problem: calls may be unreliable, and answers may still contradict the observations. EVA reframes multimodal reasoning as evidence acquisition and verification. Iterative Tool Replanning refines tool choices and parameters from intermediate observations, while Evidence Consistency Verification checks whether the synthesized answer is supported by the collected evidence. Selective Evidence Routing directs straightforward queries to a fast path and activates the evidence-seeking pipeline when additional perception is needed. Together, these mechanisms improve reasoning reliability while avoiding unnecessary tool use.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section method-section" id="method" aria-labelledby="method-title">
+      <div class="container">
+        <div class="section-topline"><p class="section-label"><span class="section-number">02</span> The method</p><span class="small-label">One evidence-grounded pipeline</span></div>
+        <h2 id="method-title">Acquire reliably.<br>Reason consistently.</h2>
+        <p class="section-intro">An adaptive route into a replan-and-verify process, with visual observations shared across steps.</p>
+        <div class="method-steps">
+          <article class="method-step"><span class="step-index routing">01 / ROUTE</span><h3>Know when to look closer</h3><p>Answer clear questions directly. Activate external perception when the query needs additional visual evidence.</p></article>
+          <article class="method-step"><span class="step-index acquisition">02 / ACQUIRE</span><h3>Let observations guide the plan</h3><p>Choose tools, inspect their outputs, and revise the next call when the evidence is missing or insufficient.</p></article>
+          <article class="method-step"><span class="step-index verification">03 / VERIFY</span><h3>Make the answer follow the evidence</h3><p>Synthesize a candidate from the evidence buffer, then check its support before producing the final answer.</p></article>
+        </div>
+        <figure class="method-figure">
+          <a class="figure-link" href="assets/method.png" data-figure data-caption="The EVA framework: selective evidence routing, iterative evidence acquisition, and evidence-consistent reasoning." aria-label="Enlarge the EVA framework">
+            <img class="paper-figure" src="assets/method.png" alt="EVA routes an image and question to a fast or slow path. On the slow path, a planner, tool executor and replanner build an evidence buffer for answer synthesis and consistency verification." width="1672" height="941" loading="lazy">
+            <span class="figure-zoom" aria-hidden="true"><img src="assets/icons/maximize-2.svg" alt="" width="18" height="18"></span>
+          </a>
+          <figcaption>The evidence buffer connects perception, planning, and answer verification.</figcaption>
+        </figure>
+        <div class="tools-row"><span class="tools-label">Five visual tools</span><ul aria-label="Visual tools"><li>OCR</li><li>GroundingDINO</li><li>DrawLine</li><li>DrawShape</li><li>GetBarInfo</li></ul></div>
+      </div>
+    </section>
+
+    <section class="section results-section" id="results" aria-labelledby="results-title">
+      <div class="container">
+        <p class="section-label"><span class="section-number">03</span> The results</p>
+        <div class="results-heading"><div><h2 id="results-title">Stronger reasoning.<br>Fewer unsupported answers.</h2><p class="section-intro">Four benchmarks. Two backbones. A shared evidence-seeking framework.</p></div></div>
+        <div class="table-toolbar">
+          <p id="table-backbone">Qwen2.5-VL-7B</p>
+          <div class="segmented-control" role="tablist" aria-label="Results backbone">
+            <button id="tab-qwen" role="tab" aria-selected="true" aria-controls="benchmark-panel" data-backbone="qwen" type="button">Qwen2.5-VL-7B</button>
+            <button id="tab-internvl" role="tab" aria-selected="false" aria-controls="benchmark-panel" tabindex="-1" data-backbone="internvl" type="button">InternVL3-14B</button>
+          </div>
+        </div>
+        <div id="benchmark-panel" role="tabpanel" aria-labelledby="tab-qwen">
+          <div class="table-scroll" tabindex="0" role="region" aria-label="Benchmark comparison table">
+            <table>
+              <caption class="visually-hidden">Results reported in Table 1 of the EVA paper, in percent.</caption>
+              <thead><tr><th scope="col">Method</th><th scope="col">MMMU<span>Accuracy</span></th><th scope="col">MMStar<span>Accuracy</span></th><th scope="col">HallusionBench<span>Average</span></th><th scope="col">POPE<span>F1</span></th></tr></thead>
+              <tbody id="benchmark-body">
+                <tr><th scope="row">Direct inference</th><td>45.0</td><td>61.2</td><td>46.4</td><td>85.9</td></tr>
+                <tr><th scope="row">Self-Refine</th><td>45.8</td><td>61.5</td><td>48.8</td><td>84.0</td></tr>
+                <tr><th scope="row">MAD-Vote</th><td>44.7</td><td>57.4</td><td>37.8</td><td>74.1</td></tr>
+                <tr><th scope="row">MAD-Judge</th><td>47.4</td><td>62.3</td><td>50.2</td><td>83.5</td></tr>
+                <tr><th scope="row">MUG</th><td>50.3</td><td>63.8</td><td>53.8</td><td>87.4</td></tr>
+                <tr class="eva-row"><th scope="row">EVA <span>Ours</span></th><td>51.4</td><td>64.3</td><td>54.4</td><td>87.3</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="results-note">Results reported in <a href="assets/paper.pdf#page=7" target="_blank" rel="noopener noreferrer">Table 1 of the paper</a>. HallusionBench Average is the mean of aAcc, fAcc, and qAcc. All values are percentages.</p>
+          <div class="gain-strip" aria-live="polite" aria-atomic="true"><span>Change from direct inference <small>Percentage points</small></span><strong id="gain-mmmu">+6.4 <small>MMMU</small></strong><strong id="gain-mmstar">+3.1 <small>MMStar</small></strong><strong id="gain-hallusion">+8.0 <small>HallusionBench</small></strong><strong id="gain-pope">+1.4 <small>POPE F1</small></strong></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section efficiency-section" aria-labelledby="efficiency-title">
+      <div class="container">
+        <p class="section-label"><span class="section-number">04</span> The efficiency</p>
+        <h2 id="efficiency-title">More evidence where it matters.<br>Less computation where it does not.</h2>
+        <div class="efficiency-layout">
+          <div class="efficiency-copy">
+            <p class="lead">Selective routing treats tool use as a targeted intervention, not a default operation.</p>
+            <dl class="efficiency-stats">
+              <div><dt>19.87<span>%</span></dt><dd>of samples activate external tools</dd></div>
+              <div><dt>0.323</dt><dd>tool calls per sample</dd></div>
+              <div><dt>62.7<span>%</span></dt><dd>lower average latency than MUG</dd></div>
+            </dl>
+            <p class="measurement-note">Paper's HallusionBench behavior analysis. The latency comparison uses Qwen2.5-VL-7B on an NVIDIA RTX 4090: 9.84 s for EVA versus 26.35 s for MUG.</p>
+          </div>
+          <figure>
+            <a class="figure-link" href="assets/efficiency.png" data-figure data-caption="Performance versus average inference time on HallusionBench with Qwen2.5-VL-7B, as reported in the paper." aria-label="Enlarge the performance and latency comparison">
+              <img class="paper-figure" src="assets/efficiency.png" alt="Performance-latency plot: EVA reaches 54.4% HallusionBench average at 9.84 seconds per sample, versus 53.8% at 26.35 seconds for MUG." width="1425" height="1019" loading="lazy">
+              <span class="figure-zoom" aria-hidden="true"><img src="assets/icons/maximize-2.svg" alt="" width="18" height="18"></span>
+            </a>
+            <figcaption>Higher HallusionBench performance with lower inference latency than multi-agent deliberation.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section case-section" aria-labelledby="case-title">
+      <div class="container">
+        <p class="section-label"><span class="section-number">05</span> Evidence in action</p>
+        <h2 id="case-title">Correct observations.<br>A corrected conclusion.</h2>
+        <p class="section-intro">Acquiring the right numbers is only half the task. The final answer must use them consistently.</p>
+        <div class="case-layout">
+          <div class="case-story">
+            <p class="case-question">Does China, Hong Kong SAR have the highest import value in this chart?</p>
+            <div class="case-step"><span>01</span><div><h3>Acquire</h3><p>GetBarInfo extracts the relevant import values.</p><dl class="evidence-values"><div><dt>Switzerland</dt><dd>16,000</dd></div><div><dt>China, Hong Kong SAR</dt><dd>13,500</dd></div></dl><p class="unit">In millions of U.S. dollars.</p></div></div>
+            <div class="case-step"><span>02</span><div><h3>Synthesize</h3><p>The initial candidate answers <strong>Yes</strong>, despite the extracted values.</p></div></div>
+            <div class="case-step"><span>03</span><div><h3>Verify</h3><p>The consistency check compares the answer with the evidence: Switzerland's value is higher.</p><p class="case-answer"><img src="assets/icons/check.svg" alt="" width="20" height="20"> Final answer: <strong>No</strong></p></div></div>
+          </div>
+          <figure class="case-figure">
+            <a class="figure-link" href="assets/verification-example.png" data-figure data-caption="Original example from the authors' materials: evidence consistency verification corrects the chart answer from Yes to No." aria-label="Enlarge the original chart reasoning trace">
+              <img class="paper-figure" src="assets/verification-example.png" alt="Original EVA trace showing a chart question, GetBarInfo values, an incorrect synthesized Yes answer, and the consistency verifier's corrected No answer." width="3406" height="3404" loading="lazy">
+              <span class="figure-zoom" aria-hidden="true"><img src="assets/icons/maximize-2.svg" alt="" width="18" height="18"></span>
+            </a>
+            <figcaption>The original evidence-to-answer trace.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section ablation-section" aria-labelledby="ablation-title">
+      <div class="container ablation-layout">
+        <div><p class="section-label">What makes it work</p><h2 id="ablation-title">Acquisition and verification<br>are complementary.</h2><p class="section-intro">Removing either mechanism weakens HallusionBench performance. Removing both has the largest effect.</p></div>
+        <div class="ablation-bars" aria-label="HallusionBench ablation results reported in the paper">
+          <div class="ablation-item"><div><span>Full EVA</span><strong>54.4</strong></div><meter min="0" max="60" value="54.4" aria-label="Full EVA: 54.4 percent">54.4</meter></div>
+          <div class="ablation-item"><div><span>Without replanning</span><strong>51.3</strong></div><meter min="0" max="60" value="51.3" aria-label="Without replanning: 51.3 percent">51.3</meter></div>
+          <div class="ablation-item"><div><span>Without verification</span><strong>50.6</strong></div><meter min="0" max="60" value="50.6" aria-label="Without verification: 50.6 percent">50.6</meter></div>
+          <div class="ablation-item"><div><span>Without replanning and verification</span><strong>48.6</strong></div><meter min="0" max="60" value="48.6" aria-label="Without replanning and verification: 48.6 percent">48.6</meter></div>
+          <p class="results-note">Qwen2.5-VL-7B, HallusionBench Average (%). Paper, Table 2.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section citation-section" id="citation" aria-labelledby="citation-title">
+      <div class="container">
+        <div class="citation-heading"><div><p class="section-label">Reference</p><h2 id="citation-title">Citation</h2></div><button class="icon-button copy-button" id="copy-citation" type="button" aria-label="Copy BibTeX citation" title="Copy BibTeX citation"><img src="assets/icons/copy.svg" alt="" width="20" height="20"></button></div>
+        <pre><code id="bibtex">@inproceedings{lei2026eva,
+  title     = {EVA: Evidence-seeking Visual Agent for
+               Hallucination-Resistant Multimodal Reasoning},
+  author    = {Lei, Ting and Chen, Yu and Liu, Yang},
+  booktitle = {Advances in Neural Information Processing Systems},
+  year      = {2026}
+}</code></pre>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer"><div class="container footer-inner"><div><a class="wordmark" href="#top">EVA<span aria-hidden="true">.</span></a><p>Wangxuan Institute of Computer Technology<br>Peking University</p></div><div class="footer-links"><a href="https://github.com/oceanflowlab/EVA" target="_blank" rel="noopener noreferrer">Code <img src="assets/icons/arrow-up-right.svg" alt="" width="15" height="15"></a><a href="mailto:ting_lei@pku.edu.cn">Contact <img src="assets/icons/arrow-up-right.svg" alt="" width="15" height="15"></a></div></div></footer>
+
+  <dialog class="figure-dialog" id="figure-dialog" aria-labelledby="dialog-caption">
+    <div class="dialog-toolbar"><p id="dialog-caption"></p><button class="icon-button" id="close-figure" type="button" aria-label="Close figure" title="Close figure"><img src="assets/icons/x.svg" alt="" width="22" height="22"></button></div>
+    <div class="dialog-image-scroll"><img id="dialog-image" src="assets/teaser.png" alt=""></div>
+  </dialog>
+  <p class="toast" id="status-message" role="status" aria-live="polite"></p>
+</body>
+</html>
